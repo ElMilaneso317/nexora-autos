@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0b0d" />
+    <title>Nexora Autos - Administración</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <script src="admin.js" defer></script>
+  </head>
+  <body class="admin-body">
+    <div class="noise" aria-hidden="true"></div>
+
+    <main class="admin-login" id="loginView"><div class="login-art"><span>NEXORA WORKSPACE</span><h2>El control.<br>Sin complicaciones.</h2><img src="assets/bmw-m440i-frontal.png" alt="BMW de la colección Nexora"><p>Inventario · Seguimiento · Agenda</p></div>
+      <form class="admin-card login-card" id="loginForm" novalidate>
+        <a class="brand" href="/admin" aria-label="Nexora Autos, acceso del equipo">
+          <span class="brand-mark" aria-hidden="true"><i>N</i></span>
+          <span class="brand-copy"><strong>NEXORA</strong><small>AUTOS</small></span>
+        </a>
+        <p class="eyebrow">NEXORA / EQUIPO</p><p class="login-description">El inventario y tus clientes, en un solo lugar. Accede con tu cuenta del equipo.</p>
+        <h1>Tu espacio de trabajo.</h1>
+        <label><span>Usuario</span><input name="username" type="text" autocomplete="username" required /></label>
+        <label><span>Contraseña</span><input name="password" type="password" autocomplete="current-password" required /></label>
+        <p class="admin-error" id="loginError" hidden></p>
+        <p class="registration-notice" id="registrationNotice" role="status" hidden></p>
+        <button class="primary-button" type="submit">Iniciar sesión</button>
+      </form>
+    </main>
+
+    <main class="admin-app" id="adminView" hidden>
+      <aside class="admin-sidebar">
+        <a class="brand" href="/admin#dashboard" aria-label="Nexora Autos, resumen de mi panel">
+          <span class="brand-mark" aria-hidden="true"><i>N</i></span>
+          <span class="brand-copy"><strong>NEXORA</strong><small>AUTOS</small></span>
+        </a>
+        <nav aria-label="Secciones de administración">
+          <a href="#dashboard">Resumen</a>
+          <a href="#vehiculos">Vehículos</a>
+          <a href="#cotizaciones">Cotizaciones</a>
+          <a href="#citas">Pruebas de manejo</a><a href="#usuarios" id="usersNav">Usuarios</a>
+        </nav>
+        <button class="ghost-button" id="logoutButton" type="button">Cerrar sesión</button>
+      </aside>
+
+      <section class="admin-content">
+        <header class="admin-topbar">
+          <div>
+            <p class="eyebrow"><span></span> Centro de operaciones</p>
+            <h1 id="panelTitle">Mi espacio de trabajo</h1><p id="staffIdentity" class="staff-identity"></p>
+          </div>
+          <a class="ghost-button" href="/?vista=equipo">Consultar catálogo</a>
+        </header>
+        <details class="staff-account"><summary>Mi cuenta del equipo</summary><p>Este acceso es exclusivo de asesores y administración.</p><form id="staffPasswordForm"><label>Contraseña actual<input name="current" type="password" autocomplete="current-password" required></label><label>Nueva contraseña<input name="password" type="password" autocomplete="new-password" minlength="8" required></label><p id="staffPasswordFeedback" role="status"></p><button class="mini-button" type="submit">Guardar contraseña</button></form></details>
+
+        <section class="stats-grid" id="dashboard" aria-label="Resumen"></section>
+
+        <section class="admin-panel" id="vehiculos">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow"><span></span> Catálogo</p>
+              <h2>Vehículos</h2>
+            </div>
+            <button class="primary-button" id="newVehicleButton" type="button">Nuevo vehículo</button>
+          </div>
+
+          <form class="vehicle-form" id="vehicleForm" enctype="multipart/form-data" hidden novalidate>
+            <input type="hidden" name="id" />
+            <div class="form-grid three">
+              <label><span>Marca</span><input name="marca" required maxlength="60" /></label>
+              <label><span>Modelo</span><input name="modelo" required maxlength="80" /></label>
+              <label><span>Año</span><input name="anio" type="number" min="1990" max="2035" required /></label>
+            </div>
+            <div class="form-grid three">
+              <label><span>Precio</span><input name="precio" type="number" min="1" step="1" required /></label>
+              <label><span>Kilometraje</span><input name="kilometraje" type="number" min="0" required /></label>
+              <label><span>Carrocería</span><input name="carroceria" required maxlength="40" /></label>
+            </div>
+            <div class="form-grid three">
+              <label><span>Transmisión</span><input name="transmision" required maxlength="40" /></label>
+              <label><span>Motor</span><input name="motor" required maxlength="80" /></label>
+              <label><span>Color</span><input name="color" required maxlength="60" /></label>
+            </div>
+            <div class="form-grid three">
+              <label><span>Condición</span><select name="condicion" required><option>Nuevo</option><option>Seminuevo</option><option>Usado</option></select></label>
+              <label><span>Disponibilidad</span><select name="disponibilidad" required><option>Activo</option><option>Inactivo</option><option>Vendido</option></select></label>
+              <label><span>En la selección destacada</span><select name="destacado"><option value="0">No</option><option value="1">Sí</option></select></label>
+            </div>
+            <label><span>Descripción</span><textarea name="descripcion" rows="3" required maxlength="800"></textarea></label>
+            <div class="form-grid">
+              <label><span>Ruta de imagen actual</span><input name="imagen" placeholder="assets/auto.png" /></label>
+              <label><span>Subir imagen local</span><input name="imagen_archivo" type="file" accept="image/png,image/jpeg,image/webp" /></label>
+            </div>
+            <div class="form-grid"><label><span>Precio anterior de oferta en MXN</span><input name="precio_anterior" type="number" min="1" placeholder="Opcional"></label><label><span>Nombre de la oferta</span><input name="oferta" maxlength="120" placeholder="Opcional"></label></div>
+            <label><span>Galería actual · una ruta por línea</span><textarea name="imagenes" rows="3" placeholder="assets/auto-lateral.png&#10;assets/auto-frontal.png"></textarea><small>Conserva al menos 2 imágenes distintas del mismo vehículo. Borra una línea para quitar una foto.</small></label>
+            <label><span>Añadir fotografías a la galería</span><input name="imagenes_archivos" type="file" accept="image/png,image/jpeg,image/webp" multiple><small>Máximo 10 imágenes en total. JPG, PNG o WebP, hasta 2 MB por archivo.</small></label><div id="galleryPreview" class="gallery-preview"></div>
+            <p class="admin-error" id="vehicleError" hidden></p>
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Guardar vehículo</button>
+              <button class="ghost-button" id="cancelVehicleButton" type="button">Cancelar</button>
+            </div>
+          </form>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Auto</th>
+                  <th>Año</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="vehicleRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="cotizaciones">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow"><span></span> Seguimiento</p>
+              <h2>Cotizaciones</h2>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Solicitante</th>
+                  <th>Vehículo</th>
+                  <th>Enganche</th>
+                  <th>Plazo</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="quoteRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-panel" id="citas">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow"><span></span> Agenda</p>
+              <h2>Pruebas de manejo</h2>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Solicitante</th>
+                  <th>Vehículo</th>
+                  <th>Fecha</th>
+                  <th>Hora</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="testDriveRows"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="admin-panel" id="usuarios"><div class="panel-heading"><div><p class="eyebrow">CONTROL DE ACCESO</p><h2>Usuarios y permisos</h2></div></div><p>Los asesores consultan inventario, contactan cotizaciones y gestionan citas. Las aprobaciones, vehículos y cuentas están a cargo del administrador.</p><p>Al crear una cuenta del equipo, pasarás a iniciar sesión con el usuario nuevo. Para clientes, recibirás un enlace a su acceso sin salir de este panel.</p>
+          <form id="userForm" class="vehicle-form"><div class="form-grid three"><label><span>Nombre</span><input name="nombre" required maxlength="120"></label><label><span>Usuario</span><input name="username" required minlength="3" maxlength="60" autocomplete="off"></label><label><span>Rol</span><select name="role"><option value="empleado">Empleado</option><option value="cliente">Cliente</option><option value="admin">Administrador</option></select></label></div><div class="form-grid"><label><span>Contraseña inicial</span><input name="password" type="password" required minlength="8" autocomplete="new-password"></label><button class="primary-button" type="submit">Crear usuario</button></div><p id="userFeedback" role="status"></p></form>
+          <div class="table-wrap"><table><thead><tr><th>Nombre</th><th>Usuario</th><th>Rol</th><th>Acceso</th></tr></thead><tbody id="userRows"></tbody></table></div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

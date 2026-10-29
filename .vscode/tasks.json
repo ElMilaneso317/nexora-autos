@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Nexora: iniciar desarrollo",
+      "type": "npm",
+      "script": "dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    { "label": "Nexora: iniciar normal", "type": "npm", "script": "start", "isBackground": true, "problemMatcher": [] },
+    { "label": "Nexora: probar API", "type": "npm", "script": "test", "group": "test", "problemMatcher": [] },
+    { "label": "Nexora: probar herramientas de BD", "type": "npm", "script": "test:db", "group": "test", "problemMatcher": [] },
+    { "label": "Nexora: consultar base", "type": "npm", "script": "db:info", "problemMatcher": [] },
+    { "label": "Nexora: ejecutar consulta SQL", "type": "npm", "script": "db:sql", "problemMatcher": [] },
+    { "label": "Nexora: exportar esquema SQL", "type": "npm", "script": "db:schema", "problemMatcher": [] },
+    { "label": "Nexora: respaldar datos e imágenes", "type": "npm", "script": "backup", "problemMatcher": [] }
+  ]
+}

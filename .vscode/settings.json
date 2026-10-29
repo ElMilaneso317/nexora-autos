@@ -1,0 +1,23 @@
+{
+  "terminal.integrated.cwd": "${workspaceFolder}",
+  "npm.scriptExplorer.enabled": true,
+  "workbench.editorAssociations": {
+    "*.sqlite": "sqlite3-editor.editor"
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    ".qa": true,
+    "**/*.sqlite-wal": true,
+    "**/*.sqlite-shm": true
+  },
+  "search.exclude": {
+    "node_modules": true,
+    ".qa": true,
+    "respaldo_original": true,
+    "respaldos": true,
+    "data/respaldos-sql": true
+  },
+  "sqlite3-editor.connection.setupQueries": {
+    ".*": "PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;"
+  }
+}

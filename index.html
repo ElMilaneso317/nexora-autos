@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nexora Autos. Explora vehículos, compara sus detalles y agenda tu próxima prueba de manejo."
+    />
+    <meta name="theme-color" content="#0a0b0d" />
+    <title>Nexora Autos — Catálogo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Nexora Autos, inicio">
+        <span class="brand-mark" aria-hidden="true"><i>N</i></span>
+        <span class="brand-copy">
+          <strong>NEXORA</strong>
+          <small>AUTOS</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegación principal">
+        <a class="active" href="#inventario">Inventario</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button" id="searchToggle" type="button" aria-label="Abrir búsqueda">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.8-3.8"></path></svg>
+        </button>
+        <button class="favorite-summary" id="favoritesOnly" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"></path></svg>
+          <span>Favoritos</span>
+          <b id="favoriteCount">0</b>
+        </button>
+        <button class="icon-button notification-button" id="notificationsButton" type="button" aria-label="Mis notificaciones" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"></path></svg><b id="notificationCount" hidden>0</b></button>
+        <button class="account-button" id="accountButton" type="button">Mi cuenta</button>
+        <a class="primary-button header-quote" href="#inventario">
+          Explorar
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </a>
+        <button class="icon-button mobile-menu" id="mobileMenu" type="button" aria-label="Mostrar menú">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="search-drawer" id="searchDrawer" aria-hidden="true">
+      <div class="search-inner">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.8-3.8"></path></svg>
+        <input id="searchInput" type="search" placeholder="Busca por marca o modelo…" autocomplete="off" />
+        <kbd>ESC</kbd>
+        <button id="searchClose" type="button" aria-label="Cerrar búsqueda">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Navegación móvil" aria-hidden="true">
+      <a href="#inventario">Inventario</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <aside class="staff-preview-banner" id="staffPreviewBanner" hidden><div><strong id="previewIdentity"></strong><span>Vista de consulta del catálogo para el equipo.</span></div><a class="ghost-button" href="/admin#dashboard">Volver a mi panel</a></aside>
+    <main id="inicio">
+      <section class="hero" aria-label="Vehículos destacados">
+        <div class="hero-copy">
+          <p class="eyebrow">NEXORA AUTOS / SELECCIÓN 2026</p>
+          <h1>El siguiente nivel.<br><span>En tus manos.</span></h1>
+          <p class="hero-description">Diseño que se siente. Potencia que se vive.<br>Encuentra el auto que va contigo.</p>
+          <a class="primary-button" href="#inventario">Explorar colección <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="#destacados">Conoce los destacados <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-product" id="heroProduct" aria-live="polite"></div>
+        <div class="hero-bottom"><span>Una nueva forma de elegir.</span><div class="carousel-controls" id="heroControls"></div><a href="#inventario">Descubre más ↓</a></div>
+      </section>
+      <section class="featured-section" id="destacados">
+        <div class="section-heading"><div><p class="eyebrow">EN EL RADAR</p><h2>Hechos para destacar.</h2></div><div class="rail-controls"><button type="button" id="featuredPrev" aria-label="Destacados anteriores">←</button><button type="button" id="featuredNext" aria-label="Siguientes destacados">→</button></div></div>
+        <div class="featured-rail" id="featuredRail" aria-label="Carrusel de vehículos destacados" tabindex="0"></div>
+        <p class="section-note">Precios en MXN. Ofertas e imágenes de demostración sujetas a confirmación.</p>
+      </section>
+      <section class="inventory-shell" id="inventario">
+        <div class="filter-scrim" id="filterScrim"></div>
+        <aside class="filter-panel" id="filterPanel" aria-label="Filtros del catálogo">
+          <div class="filter-heading">
+            <div>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6"></path></svg>
+              <h2>Filtros</h2>
+            </div>
+            <button id="clearFilters" type="button">Limpiar</button>
+            <button class="filter-close" id="filterClose" type="button" aria-label="Cerrar filtros">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+            </button>
+          </div>
+
+          <div class="filter-scroll">
+            <fieldset class="filter-group price-filter">
+              <legend>Rango de precio</legend>
+              <div class="price-values">
+                <span id="minPriceLabel">$400 mil</span>
+                <span id="maxPriceLabel">$1.5 M</span>
+              </div>
+              <label>
+                <span>Precio mínimo</span>
+                <input id="minPrice" type="range" min="400" max="1500" step="25" value="400" />
+              </label>
+              <label>
+                <span>Precio máximo</span>
+                <input id="maxPrice" type="range" min="400" max="1500" step="25" value="1500" />
+              </label>
+            </fieldset>
+
+            <fieldset class="filter-group">
+              <legend>Condición</legend>
+              <label class="check-row"><input type="checkbox" name="status" value="Nuevo" /><i></i><span>Nuevo</span><b>1</b></label>
+              <label class="check-row"><input type="checkbox" name="status" value="Seminuevo" /><i></i><span>Seminuevo</span><b>5</b></label>
+            </fieldset>
+
+            <fieldset class="filter-group">
+              <legend>Tipo de vehículo</legend>
+              <label class="check-row"><input type="checkbox" name="type" value="Coupé" /><i></i><span>Coupé</span><b>4</b></label>
+              <label class="check-row"><input type="checkbox" name="type" value="SUV" /><i></i><span>SUV</span><b>1</b></label>
+              <label class="check-row"><input type="checkbox" name="type" value="Convertible" /><i></i><span>Convertible</span><b>1</b></label>
+            </fieldset>
+
+            <fieldset class="filter-group">
+              <legend>Marca</legend>
+              <label class="check-row"><input type="checkbox" name="brand" value="BMW" /><i></i><span>BMW</span><b>1</b></label>
+              <label class="check-row"><input type="checkbox" name="brand" value="Toyota" /><i></i><span>Toyota</span><b>1</b></label>
+              <label class="check-row"><input type="checkbox" name="brand" value="Nissan" /><i></i><span>Nissan</span><b>1</b></label>
+              <label class="check-row"><input type="checkbox" name="brand" value="Audi" /><i></i><span>Audi</span><b>1</b></label>
+              <label class="check-row"><input type="checkbox" name="brand" value="Ford" /><i></i><span>Ford</span><b>1</b></label>
+              <label class="check-row"><input type="checkbox" name="brand" value="Mazda" /><i></i><span>Mazda</span><b>1</b></label>
+            </fieldset>
+
+            <div class="trust-card">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 2.9 8.3 7 10 4.1-1.7 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+              <div><strong>Elige con información</strong><span>Fotos, especificaciones y asesoría</span></div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="catalog">
+          <div class="catalog-heading">
+            <div>
+              <p class="eyebrow"><span></span> Inventario seleccionado</p>
+              <h2>Tu próxima gran decisión.</h2>
+              <p id="resultCopy"><strong id="resultCount">6</strong> vehículos disponibles</p>
+            </div>
+            <div class="catalog-tools">
+              <button class="filter-trigger" id="filterOpen" type="button" aria-controls="filterPanel" aria-expanded="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M6 14v6"></path></svg>
+                Filtros
+              </button>
+              <label class="sort-control">
+                <span>Ordenar por</span>
+                <select id="sortSelect">
+                  <option value="featured">Recomendados</option>
+                  <option value="price-asc">Menor precio</option>
+                  <option value="price-desc">Mayor precio</option>
+                  <option value="year-desc">Más recientes</option>
+                  <option value="mileage-asc">Menor kilometraje</option>
+                </select>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"></path></svg>
+              </label>
+            </div>
+          </div>
+
+          <div class="active-filters" id="activeFilters" aria-live="polite"></div>
+          <div class="vehicle-grid" id="vehicleGrid"></div>
+
+          <div class="empty-state" id="emptyState" hidden>
+            <span>0</span>
+            <h2>No encontramos coincidencias</h2>
+            <p>Prueba con otro término o elimina algunos filtros.</p>
+            <button class="primary-button" type="button" data-action="clear">Ver todo el inventario</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="experience-section" id="experiencia">
+        <p class="eyebrow">LA EXPERIENCIA NEXORA</p><h2>Menos vueltas.<br>Más camino.</h2>
+        <div class="experience-grid" id="servicios"><article><span>01 / EXPLORA</span><h3>Cada detalle cuenta.</h3><p>Compara modelos, descubre sus imágenes y guarda tus favoritos para volver a ellos.</p></article><article><span>02 / COTIZA</span><h3>Tu auto, tu plan.</h3><p>Envía tu enganche y plazo. Un asesor revisará las opciones contigo.</p><button class="text-link" data-action="quote" type="button">Solicitar cotización →</button></article><article><span>03 / CONDUCE</span><h3>Siéntelo de cerca.</h3><p>Elige un día para una prueba de manejo. Consulta su confirmación desde tu cuenta.</p><button class="text-link" data-action="schedule" type="button">Agendar prueba →</button></article></div>
+      </section>
+      <section class="contact-strip" id="contacto"><div><p class="eyebrow">TU SIGUIENTE PASO</p><h2>Todo empieza con un auto.</h2></div><button class="primary-button" data-action="quote" type="button">Hablar con un asesor ↗</button></section>
+    </main>
+
+    <footer>
+      <a class="brand brand-footer" href="#inicio">
+        <span class="brand-mark" aria-hidden="true"><i>N</i></span>
+        <span class="brand-copy"><strong>NEXORA</strong><small>AUTOS</small></span>
+      </a>
+      <p>© 2026 Nexora Autos · Proyecto académico local</p><a href="/admin">Acceso del equipo ↗</a>
+    </footer>
+
+    <dialog class="vehicle-dialog" id="vehicleDialog" aria-label="Detalle del vehículo">
+      <button class="dialog-close" id="dialogClose" type="button" aria-label="Cerrar detalle">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+      </button>
+      <div id="dialogContent"></div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      <span class="toast-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
+      </span>
+      <div><strong id="toastTitle">Listo</strong><p id="toastMessage">Acción realizada.</p></div>
+    </div>
+  </body>
+</html>

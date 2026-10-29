@@ -1,0 +1,24 @@
+{
+  "name": "nexora-autos-local",
+  "version": "2.0.0",
+  "description": "Aplicacion web local para catalogo, cotizaciones, pruebas de manejo y administracion de Nexora Autos.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "dev": "node --env-file-if-exists=.env --watch server.js",
+    "test": "node tests/integration.test.js",
+    "test:db": "node tests/db-tools.test.js",
+    "backup": "node --env-file-if-exists=.env scripts/backup.js",
+    "db:info": "node --env-file-if-exists=.env scripts/db-info.js",
+    "db:sql": "node --env-file-if-exists=.env scripts/db-sql.js",
+    "db:schema": "node --env-file-if-exists=.env scripts/export-schema.js"
+  },
+  "engines": { "node": ">=22.18.0" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "express": "^5.2.1",
+    "express-session": "^1.18.1",
+    "multer": "^2.3.0"
+  }
+}

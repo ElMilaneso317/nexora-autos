@@ -1,0 +1,35 @@
+# Dependencias y archivos de ejecución
+node_modules/
+data/
+*.sqlite*
+*.db
+*.db-wal
+*.db-shm
+*.log
+
+# Configuración privada
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Subidas de usuarios; conservar únicamente el recurso heredado del catálogo
+uploads/*
+!uploads/1788546869103-de1093210784.jpg
+
+# Documentos académicos y salidas generadas, enviados por separado
+documentacion/*
+!documentacion/.gitkeep
+*.docx
+*.pdf
+*.zip
+
+# Copias y herramientas internas
+.qa/
+respaldos/
+respaldo_original/
+CONTINUAR_NEXORA.md
+__pycache__/
+.DS_Store
+Thumbs.db
